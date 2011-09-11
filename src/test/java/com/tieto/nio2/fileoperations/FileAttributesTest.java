@@ -4,6 +4,7 @@
  */
 package com.tieto.nio2.fileoperations;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.FileStore;
@@ -14,6 +15,7 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.nio.file.attribute.PosixFileAttributes;
+import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +67,16 @@ public class FileAttributesTest {
         assertFalse(Files.isDirectory(testFile));
         assertTrue(Files.isRegularFile(testFile));
         assertFalse(Files.isSymbolicLink(testFile));
+    }
+    
+    @Test
+    public void testReadingFileAttributesOldWay() throws URISyntaxException, IOException{
+        final File file = new File(getClass().getClassLoader().getResource("watchingFolder/test.txt").toURI());
+        assertNotNull(file);
+        System.out.format("Last Modified Time> %ta \n", new Date(file.lastModified()));
+        System.out.format("Size> %s bytes \n", file.length());
+        assertFalse(file.isDirectory());
+        assertTrue(file.isFile());
     }
     
     @Test

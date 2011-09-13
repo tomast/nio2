@@ -88,6 +88,11 @@ public class PosixFilePermissionsTest {
         Files.setPosixFilePermissions(file, perms);
         assertEquals("rwxrwxrw-", PosixFilePermissions.toString(
                 Files.readAttributes(file, PosixFileAttributes.class).permissions()));
+        
+        assertTrue(Files.isRegularFile(file));
+        assertTrue(Files.isReadable(file));
+        assertTrue(Files.isWritable(file));
+        assertTrue(Files.isExecutable(file));
     }
 
     @Test

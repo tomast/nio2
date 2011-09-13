@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in the editor.
  */
 package com.tieto.nio2.walkfiletree;
 
@@ -15,15 +14,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author tur075
  */
 public class PrintXmlFileInformationTest {
-
+    
     @BeforeClass
     public static void setUpClass() throws Exception {
     }
-
+    
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
@@ -35,7 +33,7 @@ public class PrintXmlFileInformationTest {
     @After
     public void tearDown() {
     }
-
+    
     /**
      * Test of preVisitDirectory method, of class PrintFileInformation.
      */
@@ -46,5 +44,5 @@ public class PrintXmlFileInformationTest {
         
         Files.walkFileTree(rootDir, new PrintXmlFileInformation());
     }
-
+    
 }

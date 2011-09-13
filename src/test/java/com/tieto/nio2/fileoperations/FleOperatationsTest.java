@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in the editor.
  */
 package com.tieto.nio2.fileoperations;
 
@@ -20,7 +19,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author tur075
  */
 public class FleOperatationsTest {
@@ -34,7 +32,7 @@ public class FleOperatationsTest {
     }
     
     @Test
-    public void testDeleteNotExistingFileJava6(){
+    public void testDeleteNotExistingFileJava6() {
         final File testFile = new File("watchingFolder/test.txt");
         assertNotNull(testFile);
         boolean deleted = testFile.delete();
@@ -42,15 +40,15 @@ public class FleOperatationsTest {
         assertFalse(deleted);
     }
     
-    @Test (expected = NoSuchFileException.class)
-    public void testDeleteNotExistingFileJava7() throws URISyntaxException, IOException{
+    @Test(expected = NoSuchFileException.class)
+    public void testDeleteNotExistingFileJava7() throws URISyntaxException, IOException {
         final Path testFile = Paths.get("watchingFolder/test.txt");
         assertNotNull(testFile);
         Files.delete(testFile);
     }
     
     @Test
-    public void testReadingAllFileLines() throws URISyntaxException, IOException{
+    public void testReadingAllFileLines() throws URISyntaxException, IOException {
         final Path testFile = Paths.get(getClass().getClassLoader().getResource("watchingFolder/test.txt").toURI());
         assertNotNull(testFile);
         final List<String> lines = Files.readAllLines(testFile, Charset.forName("UTF-8"));
@@ -58,7 +56,7 @@ public class FleOperatationsTest {
     }
     
     @Test
-    public void testDirectoryStreamWithGlob() throws URISyntaxException, IOException{
+    public void testDirectoryStreamWithGlob() throws URISyntaxException, IOException {
         final Path testFile = Paths.get(getClass().getClassLoader().getResource("watchingFolder").toURI());
         assertNotNull(testFile);
         final DirectoryStream<Path> dirStream = Files.newDirectoryStream(testFile, "*.txt");

@@ -30,6 +30,8 @@ public class LinkTest {
         Files.deleteIfExists(Paths.get("src/main/resources/sl2"));
         Files.deleteIfExists(Paths.get("src/main/resources/hl1"));
         Files.deleteIfExists(Paths.get("src/main/resources/target.log"));
+        Files.deleteIfExists(Paths.get("test1"));
+        Files.deleteIfExists(Paths.get("test2"));
     }
 
     @Before
@@ -58,7 +60,7 @@ public class LinkTest {
         Path target = Paths.get("src/main/resources/target.log");
         Files.createFile(target);
         Files.createLink(link, target);
-        
+
         assertTrue(Files.isSameFile(link, target));
     }
 
@@ -70,5 +72,17 @@ public class LinkTest {
 
         assertTrue(Files.exists(link));
         assertFalse(Files.exists(target));
+    }
+
+    @Test
+    public void testIsSameFile() throws IOException {
+        final Path target = Paths.get("src/main/resources/1.log");
+        final Path p1 = Paths.get("test1");
+        final Path p2 = Paths.get("test2");
+
+        Files.createSymbolicLink(p1, target);
+        Files.createSymbolicLink(p2, target);
+
+        assertTrue(Files.isSameFile(p1, p2));
     }
 }

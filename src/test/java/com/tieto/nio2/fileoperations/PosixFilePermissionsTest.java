@@ -22,6 +22,7 @@ import org.junit.Test;
 
 /**
  * The Class PosixFilePermissionsTest.
+ * 
  * @author monckdav
  */
 public class PosixFilePermissionsTest {
@@ -44,8 +45,9 @@ public class PosixFilePermissionsTest {
 
     @Test
     public void testPathOperations() throws IOException {
-        Path file = Paths.get(System.getProperty("user.home"), "workspaces", "jug", "nio2", "src/main/resources", "1.log");
-        
+        Path file = Paths.get(System.getProperty("user.home"), "workspaces", "jug", "nio2", "src/main/resources",
+                "1.log");
+
         assertEquals("/", file.getFileSystem().getSeparator());
         assertEquals("/home/monckdav/workspaces/jug/nio2/src/main/resources/1.log", file.toString());
         assertEquals("/home/monckdav/workspaces/jug/nio2/src/main/resources", file.getParent().toString());
@@ -73,22 +75,23 @@ public class PosixFilePermissionsTest {
     @Test
     public void testReadAttributes() throws IOException {
         Path file = Paths.get("src/main/resources", "1.log");
-        
+
         PosixFileAttributes attr = Files.readAttributes(file, PosixFileAttributes.class);
         assertEquals("rw-r--r--", PosixFilePermissions.toString(attr.permissions()));
-        //System.out.format("%s %s %s %s%n", file.getFileName().toString(), attr.owner().getName(), attr.group().getName(), 
-        //        PosixFilePermissions.toString(attr.permissions()));
+        // System.out.format("%s %s %s %s%n", file.getFileName().toString(), attr.owner().getName(),
+        // attr.group().getName(),
+        // PosixFilePermissions.toString(attr.permissions()));
     }
 
     @Test
     public void testFromString() throws IOException {
         Path file = Paths.get("src/main/resources/2.log");
-        
+
         Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxrwxrw-");
         Files.setPosixFilePermissions(file, perms);
-        assertEquals("rwxrwxrw-", PosixFilePermissions.toString(
-                Files.readAttributes(file, PosixFileAttributes.class).permissions()));
-        
+        assertEquals("rwxrwxrw-",
+                PosixFilePermissions.toString(Files.readAttributes(file, PosixFileAttributes.class).permissions()));
+
         assertTrue(Files.isRegularFile(file));
         assertTrue(Files.isReadable(file));
         assertTrue(Files.isWritable(file));
@@ -104,10 +107,11 @@ public class PosixFilePermissionsTest {
     }
 
     @Test
-    @Ignore
     public void testChangeGroup() throws IOException {
+        String groupName = "adm";
         Path file = Paths.get("src/main/resources/3.log");
-        GroupPrincipal group = file.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByGroupName("monckdav");
+        GroupPrincipal group = file.getFileSystem().getUserPrincipalLookupService()
+                .lookupPrincipalByGroupName(groupName);
         Files.getFileAttributeView(file, PosixFileAttributeView.class).setGroup(group);
     }
 }

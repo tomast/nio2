@@ -82,7 +82,6 @@ public class Email {
                 
                 //Email the file to the specified email alias.
                 System.out.format("Emailing file %s%n", filename);
-                //Details left to reader....
             }
             
             //Reset the key -- this step is critical if you want to receive

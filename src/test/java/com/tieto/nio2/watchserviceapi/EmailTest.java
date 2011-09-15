@@ -6,28 +6,33 @@ package com.tieto.nio2.watchserviceapi;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import junit.framework.TestCase;
+
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
- * @author tur075
+ * @author tureltom
  */
 public class EmailTest extends TestCase {
     
     /**
      * Test of processEvents method, of class Email.
      */
-    
+    @Test
+    @Ignore
     public void testProcessEvents() throws IOException, URISyntaxException {
-        final URL resourceToWatch = getClass().getClassLoader().getResource("watchingFolder");
+//        final URL resourceToWatch = getClass().getClassLoader().getResource("c:/watchingFolder");
+//        assertNotNull(resourceToWatch);
         
-        assertNotNull(resourceToWatch);
+//        Path dir = FileSystems.getDefault().getPath("C:/watchingDirectory");
         
         //register directory and process its events
-        Path dir = Paths.get(resourceToWatch.toURI());
+        final Path dir = Paths.get("C:/watchingDirectory");
         new Email(dir).processEvents();
     }
 }

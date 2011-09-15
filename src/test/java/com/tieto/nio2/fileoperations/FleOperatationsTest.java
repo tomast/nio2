@@ -5,6 +5,7 @@ package com.tieto.nio2.fileoperations;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +17,9 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -84,5 +85,18 @@ public class FleOperatationsTest {
         for (Path txtFile : dirStream) {
             System.out.format("File name> %s \n", txtFile);
         }
+    }
+    
+    @Test
+    @Ignore
+    public void testIsSameFile() throws URISyntaxException, IOException{
+        final Path target = Paths.get(getClass().getClassLoader().getResource("watchingFolder").toURI());
+        final Path p1 = Paths.get("c:/test1");
+        final Path p2 = Paths.get("c:/test2");
+        
+        Files.createLink(p1, target);
+        Files.createLink(p2, target);
+        
+        assertTrue(Files.isSameFile(p1, p2));
     }
 }
